@@ -8,8 +8,48 @@
 
 import UIKit
 
-struct student {
-    let age : Int
+class ListNode {
+    var val: Int?
+    var next: ListNode?
+    
+    init(val: Int){
+        
+        self.val = val
+        self.next = nil
+    }
+}
+
+
+class List {
+    var head: ListNode?
+    var tail: ListNode?
+    
+    //尾插
+    func appendToTail(val: Int) {
+        
+        if tail == nil {
+            
+            tail = ListNode(val: val)
+            head = tail
+        }else{
+            
+            tail?.next = ListNode(val: val)
+            tail = tail!.next
+        }
+    }
+    
+    
+    //头插
+    func appendToHead(val: Int) {
+        if head == nil {
+            head = ListNode(val: val)
+            tail = head
+        }else{
+            let tmp = ListNode(val: val)
+            tmp.next = head
+            head = tmp
+        }
+    }
 }
 
 class ViewController: UIViewController {
@@ -19,72 +59,45 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        var str = "the sky is blue"
-        
-        
-        print(reverseWords(str))
+        let tmp = List()
+        tmp.appendToTail(1)
+        tmp.appendToTail(5)
+        tmp.appendToTail(3)
+        tmp.appendToTail(2)
+        tmp.appendToTail(4)
+        tmp.appendToTail(2)
+    
+        let ws = partition(tmp.head, minNum: 3)
+        print(ws)
     }
     
     
-    func twoSun(sums: [Int], target: Int) -> [Int] {
+    func partition(head: ListNode!, minNum: Int) -> ListNode? {
         
-        var resultArr = [Int]()
-        var dic = [Int: Int]()
+        let prevDummy = ListNode(val: 0)
+        var prev = prevDummy
+        let postDummy = ListNode(val: 0)
+        var post = postDummy
         
-        for i in 0..<sums.count{
-            guard let lastIndex = dic[target - sums[i]] else{
-                
-                dic[sums[i]] = i
-                continue
+        var node = head
+        
+        
+        while node != nil {
+            if node.val < minNum {
+                prev.next = node
+                prev = node!
+            }else{
+                post.next = node
+                post = node!
             }
-            
-            resultArr.append(lastIndex)
-            resultArr.append(i)
-            break
-            
+            node = node!.next
         }
         
+        post.next = nil
+        prev.next = postDummy.next
         
-        return resultArr
+        return prevDummy.next
     }
-    
-    func transformStr(inout chars: [Character], p: Int, q: Int){
-        
-        let tmp = chars[p]
-        chars[p] = chars[q]
-        chars[q] = tmp;
-    }
-    
-    
-    func reverseWords(s: String) -> String {
-        
-        var strArr = [Character](s.characters)
-        reverse(&strArr, start: 0, end: strArr.count - 1)
-        
-        var start = 0
-        for i in 0..<strArr.count {
-            if (i == strArr.count - 1) || (strArr[i + 1] == " ") {
-                reverse(&strArr, start: start, end: i)
-                start = i + 2
-            }
-        }
-        
-        return String(strArr)
-    }
-    
-    func reverse(inout chars: [Character], start: Int, end: Int){
-        
-        var startValue = start
-        var endValue = end
-        
-        while startValue < endValue {
-            transformStr(&chars, p: startValue, q: endValue)
-            startValue += 1
-            endValue -= 1
-        }
-        
-    }
-    
     
 
 }
