@@ -19,14 +19,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        var str = "the sky is blue"
+        let str = "the sky is blue"
         
-        
+        //反转字符串
         print(reverseWords(str))
     }
     
     
-    func twoSun(sums: [Int], target: Int) -> [Int] {
+    func twoSun(_ sums: [Int], target: Int) -> [Int] {
         
         var resultArr = [Int]()
         var dic = [Int: Int]()
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         return resultArr
     }
     
-    func transformStr(inout chars: [Character], p: Int, q: Int){
+    func transformStr(_ chars: inout [Character], p: Int, q: Int){
         
         let tmp = chars[p]
         chars[p] = chars[q]
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     
-    func reverseWords(s: String) -> String {
+    func reverseWords(_ s: String) -> String {
         
         var strArr = [Character](s.characters)
         reverse(&strArr, start: 0, end: strArr.count - 1)
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         return String(strArr)
     }
     
-    func reverse(inout chars: [Character], start: Int, end: Int){
+    func reverse(_ chars: inout [Character], start: Int, end: Int){
         
         var startValue = start
         var endValue = end
