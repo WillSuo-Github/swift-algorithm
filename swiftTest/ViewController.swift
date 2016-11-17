@@ -25,7 +25,7 @@ class List {
     var tail: ListNode?
     
     //尾插
-    func appendToTail(val: Int) {
+    func appendToTail(_ val: Int) {
         
         if tail == nil {
             
@@ -40,7 +40,7 @@ class List {
     
     
     //头插
-    func appendToHead(val: Int) {
+    func appendToHead(_ val: Int) {
         if head == nil {
             head = ListNode(val: val)
             tail = head
@@ -68,11 +68,11 @@ class ViewController: UIViewController {
         tmp.appendToTail(2)
     
         let ws = partition(tmp.head, minNum: 3)
-        print(ws)
+        print(ws as Any)
     }
     
     
-    func partition(head: ListNode!, minNum: Int) -> ListNode? {
+    func partition(_ head: ListNode!, minNum: Int) -> ListNode? {
         
         let prevDummy = ListNode(val: 0)
         var prev = prevDummy
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         
         
         while node != nil {
-            if node.val < minNum {
+            if node!.val! < minNum {
                 prev.next = node
                 prev = node!
             }else{
